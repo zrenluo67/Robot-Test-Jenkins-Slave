@@ -1,4 +1,4 @@
- ***
+***
 | ${BROWSER} | chrome
 
 *** Settings ***
@@ -7,4 +7,5 @@
 
 *** Test Cases ***
 | Example
-| | Open browser | http://bbcnews.com | ${BROWSER}
+| | Open browser | https://www.ruckuswireless.com/ | ${BROWSER}
+| | Capture Page Screenshot

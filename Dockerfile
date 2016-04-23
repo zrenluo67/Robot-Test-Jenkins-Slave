@@ -1,5 +1,4 @@
 FROM ubuntu:trusty
-#FROM parisi/firefox-ubuntu-vnc
 ENV LC_ALL C
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
@@ -50,6 +49,8 @@ RUN mkdir -p /var/run/sshd
 COPY ./configs/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./configs/sshd_config /etc/ssh/sshd_config
 COPY webtest.robot /tmp/
+COPY runrobot.sh /tmp/
+RUN chmod 755 /tmp/runrobot.sh
 
 RUN npm install -g selenium-standalone
 
@@ -75,16 +76,3 @@ RUN echo "root:root" | chpasswd
 EXPOSE 22 4444 5900
 ENTRYPOINT ["/usr/bin/supervisord"]
 
-#RUN apt-get update && apt-get install -y openssh-server
-#RUN mkdir /var/run/sshd
-#RUN echo 'root:screencast' | chpasswd
-#RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-
-# SSH login fix. Otherwise user is kicked off after login
-#RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-
-#ENV NOTVISIBLE "in users profile"
-#RUN echo "export VISIBLE=now" >> /etc/profile
-
-#EXPOSE 22
-#CMD ["/usr/sbin/sshd", "-D"]
