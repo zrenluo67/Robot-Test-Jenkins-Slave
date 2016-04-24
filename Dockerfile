@@ -48,7 +48,7 @@ RUN mkdir -p /var/run/sshd
 
 COPY ./configs/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./configs/sshd_config /etc/ssh/sshd_config
-COPY webtest.robot /tmp/
+COPY gsearch.robot /tmp/
 COPY runrobot.sh /tmp/
 RUN chmod 755 /tmp/runrobot.sh
 
